@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* width: calc(50px + 50vw); */
+  height: 100vh;
+  /* border: 3px solid red; */
+  /* .App {
+    margin: auto;
+    width: 70%;
+    height:90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+}
