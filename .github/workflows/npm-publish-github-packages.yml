@@ -1,40 +1,27 @@
-name: Daily Commit via umesh.n@gramener.com
-
-# Trigger the workflow on a daily schedule at 08:30 UTC
+name: Daily Commit Workflow
 on:
   schedule:
-    - cron: '30 8 * * *'  # Runs every day at 08:30 UTC
-
-  # Allows you to run the workflow manually from the Actions tab
-  workflow_dispatch:
+    - cron: '30 8 * * *'  # Runs at 8:30 AM UTC daily
 
 jobs:
   create-commit:
     name: umesh.n@gramener.com
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false  # Disable automatic GitHub token injection
-
-      - name: Set Up Git Configuration
-        run: |
-          git config user.name "umesh.n"
-          git config user.email "umesh.n@gramener.com"
-
-      - name: Modify a File
-        run: |
-          echo "Daily update at $(date)" >> daily-log.txt
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: umesh.n@gramener.com
-        run: echo "This step is named with your email."
-
-      - name: Commit Changes
+        run: echo "hello world!"
+      
+      - name: Create daily commit
         run: |
-          git add daily-log.txt
-          git commit -m "Daily update by umesh.n@gramener.com"
-          git push origin HEAD:master
+          echo "Daily update $(date)" > daily-update.txt
+          git config --global user.email "umesh.n@gramener.com"
+          git config --global user.name "Umesh-n314"
+          git add daily-update.txt
+          git commit -m "Daily automated commit"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
