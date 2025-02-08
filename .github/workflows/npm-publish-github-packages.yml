@@ -1,6 +1,10 @@
 name: Super-Linter
-
-on: push
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '30 8 * * *'
 
 jobs:
   super-lint:
