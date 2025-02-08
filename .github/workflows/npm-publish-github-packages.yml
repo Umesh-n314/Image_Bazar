@@ -1,61 +1,25 @@
-# name: umesh.n@gramener.com
-# on:
-#   push:
-#     branches:
-#       - master
-#   schedule:
-#     - cron: '30 8 * * *'
-    
-    
-# jobs:
-#   super-lint:
-#     name: Lint code base
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: umesh.n@gramener.com
-#         run: echo "Hello, world!"
-
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Run Super-Linter
-#         uses: github/super-linter@v4
-#         env:
-#           DEFAULT_BRANCH: main
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-name: Daily Commit
-
-# Schedule the workflow to run once per day at 08:30 UTC
+name: umesh.n@gramener.com
 on:
+  push:
+    branches:
+      - master
   schedule:
-    - cron: '30 8 * * *'  # Minute Hour Day_of_Month Month Day_of_Week
-
+    - cron: '30 8 * * *'
+    
+    
 jobs:
-  create_commit:
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: umesh.n@gramener.com
+        run: echo "Hello, world!"
 
-      # Step 2: Configure Git and create a commit
-      - name: Create commit as umesh.n@gramener.com
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
         env:
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Configure Git with the specified email
-          git config user.name "GitHub Actions"
-          git config user.email "umesh.n@gramener.com"
-          
-          # (Optional) Make a trivial change to ensure there's something to commit
-          # For example, updating a timestamp file
-          echo "Last commit: $(date)" > last_commit.txt
-          git add last_commit.txt
-          
-          # Commit the changes
-          git commit -m "Daily commit by umesh.n@gramener.com"
-          
-          # Push the commit to the repository
-          git push
