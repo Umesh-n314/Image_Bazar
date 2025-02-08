@@ -1,25 +1,22 @@
-name: Daily Commit Workflow
+name: Daily Commit Update
 
 on:
   schedule:
-    - cron: '30 8 * * *'  # Runs at 8:30 AM UTC every day
-  push:
-    branches: [ main ]
+    # Schedule workflow to run daily at 02:00 AM UTC
+    - cron: "0 2 * * *"
 
 jobs:
-  daily-commit:
+  commit-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Step with email umesh.n@gramener.com
-        run: date >> daily_log.txt
-
-      - name: Commit and Push Changes
+      - name: Commit Updates - Umesh N (umesh.n@gramener.com)
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add daily_log.txt
-          git commit -m "Automated daily commit by GitHub Actions"
+          echo "Automated update on $(date)" >> daily_log.txt
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "umesh.n@gramener.com"
+          git add .
+          git commit -m "Automated commit on $(date)"
           git push
