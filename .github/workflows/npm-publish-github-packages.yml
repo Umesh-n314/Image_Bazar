@@ -1,25 +1,40 @@
-name: umesh.n@gramener.com
+name: Daily Commit via umesh.n@gramener.com
+
+# Trigger the workflow on a daily schedule at 08:30 UTC
 on:
-  push:
-    branches:
-      - master
   schedule:
-    - cron: '30 8 * * *'
-    
-    
+    - cron: '30 8 * * *'  # Runs every day at 08:30 UTC
+
+  # Allows you to run the workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  super-lint:
-    name: Lint code base
+  create-commit:
+    name: Daily Commit Job
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Disable automatic GitHub token injection
+
+      - name: Set Up Git Configuration
+        run: |
+          git config user.name "umesh.n"
+          git config user.email "umesh.n@gramener.com"
+
+      - name: Modify a File
+        run: |
+          echo "Daily update at $(date)" >> daily-log.txt
+
       - name: umesh.n@gramener.com
-        run: echo "Hello, world!"
+        run: echo "This step is named with your email."
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
+      - name: Commit Changes
+        run: |
+          git add daily-log.txt
+          git commit -m "Daily update by umesh.n@gramener.com"
+          git push origin HEAD:master
         env:
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
