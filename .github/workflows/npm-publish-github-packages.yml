@@ -10,7 +10,7 @@ on:
 
 jobs:
   create-commit:
-    name: Daily Commit Job
+    name: umesh.n@gramener.com
     runs-on: ubuntu-latest
 
     steps:
